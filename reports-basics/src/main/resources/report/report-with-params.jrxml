@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report-with-params" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="db3e9b35-9273-4127-b3c5-52484dfc3851">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="username" class="java.lang.String"/>
+	<parameter name="date" class="java.time.LocalDate"/>
+	<parameter name="total" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="30" uuid="d8963c9a-73de-4bc3-b3d6-e495304a6551"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Ubuntu" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Report with Parameters]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="90" splitType="Stretch">
+			<textField>
+				<reportElement x="120" y="0" width="435" height="30" uuid="66afe95f-69a5-485c-a68a-8641676e8e10"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Ubuntu" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{username}.isBlank() ? "No user name has been provided": $P{username}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="30" width="435" height="30" uuid="d0a855c3-ebc5-4a79-90f2-e368d90a1964"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Ubuntu" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date} == null ? "No date has been provided": $P{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="60" width="435" height="30" uuid="82069a04-7dcc-4886-b09d-709ff3b08976"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Ubuntu" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total} == null ? "0.00": $P{total}.setScale(2)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="120" height="30" uuid="4a33b857-3d2e-4c31-a907-abc7a6420203"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Ubuntu" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Username : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="120" height="30" uuid="6e6a3633-55fc-40cf-870c-575acae82b3e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Ubuntu" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="120" height="30" uuid="e1faca5e-a304-45ae-9b72-a0986e8c8018"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Ubuntu" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total : ]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

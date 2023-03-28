@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="196.0" prefWidth="332.0" style="-fx-background-color: white; -fx-font-family: Ubuntu; -fx-font-size: 14px;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.dep10.report.controller.ReportParameterSceneController">
+   <children>
+      <Label alignment="CENTER" layoutX="122.0" layoutY="14.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Jasper Reports with Parameters" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+      <VBox layoutX="102.0" layoutY="63.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <TextField fx:id="txtUsername" maxWidth="1.7976931348623157E308" promptText="Enter a username" style="-fx-prompt-text-fill: darkgray;" />
+            <DatePicker fx:id="txtDate" maxWidth="1.7976931348623157E308" promptText="Selet a date" style="-fx-prompt-text-fill: darkgray;" />
+            <TextField fx:id="txtTotal" maxWidth="1.7976931348623157E308" promptText="Enter a total" style="-fx-prompt-text-fill: darkgray;" />
+            <Button fx:id="btnShowReport" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnShowReportOnAction" text="SHOW REPORT" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
