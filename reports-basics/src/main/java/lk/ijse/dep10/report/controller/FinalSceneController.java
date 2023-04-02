@@ -17,6 +17,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import lk.ijse.dep10.report.db.DBConnection;
 import lk.ijse.dep10.report.model.Student;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
@@ -29,6 +34,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.sql.*;
+import java.util.HashMap;
 
 public class FinalSceneController {
 
@@ -115,7 +121,7 @@ public class FinalSceneController {
         }
     }
 
-    private void generateBarcode(String id) {
+    private BufferedImage generateBarcode(String id) {
         try {
             Barcode barcode = BarcodeFactory.createEAN13(id);
             barcode.setBarWidth(1);
@@ -124,6 +130,7 @@ public class FinalSceneController {
             WritableImage fxImage = SwingFXUtils.toFXImage(imgBarcode, null);
             imgBarcodeView.setFitHeight(70);
             imgBarcodeView.setImage(fxImage);
+            return imgBarcode;
         } catch (BarcodeException | OutputException e) {
             throw new RuntimeException(e);
         }
@@ -251,10 +258,25 @@ public class FinalSceneController {
         if (event.getCode() == KeyCode.DELETE) btnDelete.fire();
     }
 
-    public void btnPrintOnAction(ActionEvent event) {
+    public void btnPrintOnAction(ActionEvent event) throws JRException {
+//        JasperDesign jasperDesign = JRXmlLoader
+//                .load(getClass().getResourceAsStream("/report/student-id-card.jrxml"));
+//        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
+        JasperReport jasperReport = (JasperReport) JRLoader
+                .loadObject(getClass().getResource("/report/student-id-card.jasper"));
+
+        HashMap<String, Object> reportParams = new HashMap<>();
+        Connection dataSource = DBConnection.getInstance().getConnection();
+
+        Student selectedStudent = tbl.getSelectionModel().getSelectedItem();
+        reportParams.put("id", selectedStudent.getId());
+        reportParams.put("barcode",
+                generateBarcode(selectedStudent.getDisplayId().replace("S-", "")));
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, reportParams, dataSource);
+        JasperViewer.viewReport(jasperPrint, false);
     }
-
 
     public void btnReportOnAction(ActionEvent event) {
 
